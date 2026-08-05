@@ -16,11 +16,11 @@ const { asyncHandler } = require('../utils/errors');
 // never mounted at all outside development (see server.js), same safety
 // pattern as routes/dev.js's mint-handoff.
 //
-// Fixed test credential — NOT a real account, just for local testing. Point
-// ShadowGamma's VITE_WP_URL at this server (http://localhost:3000) to use it.
+// Fixed test credential — NOT a real account, just for testing. Point
+// ShadowGamma's VITE_WP_URL at this server to use it.
 // ════════════════════════════════════════════════════════════════════════════
-const DEV_EMAIL = 'dev@example.com';
-const DEV_PASSWORD = 'DevTest123!';
+const DEV_EMAIL = 'admin@example.com';
+const DEV_PASSWORD = 'admin!@#';
 const DEV_WP_USER_ID = 999888001;
 
 router.post(

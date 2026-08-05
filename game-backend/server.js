@@ -36,11 +36,15 @@ app.use('/api/game', gameRoutes);
 // so it can never appear in a production route table by accident.
 if (process.env.NODE_ENV !== 'production') {
   app.use('/api/dev', require('./routes/dev'));
+}
 
-  // Dev-only stand-in for WordPress's own /wp-json/game/v1/login route,
-  // mounted at the SAME path WordPress would use — point ShadowGamma's
-  // VITE_WP_URL at this server locally and the real login screen works
-  // unmodified, no WordPress required. See routes/devWpLoginStub.js.
+// Stand-in for WordPress's own /wp-json/game/v1/login route, mounted at the
+// SAME path WordPress would use — point ShadowGamma's VITE_WP_URL at this
+// server and the real login screen works unmodified, no WordPress required.
+// Opt-in via its own flag (independent of NODE_ENV) so it can be turned on
+// for a production test deploy without also enabling /api/dev's other
+// dev-only routes. See routes/devWpLoginStub.js.
+if (process.env.ENABLE_TEST_LOGIN === 'true') {
   app.use('/wp-json/game/v1', require('./routes/devWpLoginStub'));
 }
 
